@@ -1,6 +1,8 @@
 #include <iostream>
 #include "ktest.hpp"
 
+#include "frequency.h"
+
 const std::string toEncode = "Once there were brook trouts in the streams in the mountains. You could see them"
                                  " standing in the amber current where the white edges of their fins wimpled softly in"
                                  " the flow. They smelled of moss in your hand. Polished and muscular and torsional."
@@ -11,6 +13,10 @@ const std::string toEncode = "Once there were brook trouts in the streams in the
 
 int main() {
     ktest::runAllTests();
-    std::cout << "Hello, World!" << std::endl;
+    const std::map<char, size_t> freqs = getFrequencies(toEncode);
+    std::cout << "Frequencies:" << std::endl;
+    for (const auto &[key, value] : freqs) {
+        std::cout << "  " << key << ": " << value << std::endl;
+    }
     return 0;
 }

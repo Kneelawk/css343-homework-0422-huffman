@@ -6,11 +6,11 @@
 
 #include <iostream>
 
-std::unordered_map<char, size_t> get_frequencies(const std::string &str) {
-    std::unordered_map<char, size_t> res;
+std::map<char, size_t> getFrequencies(const std::string &str) {
+    std::map<char, size_t> res;
 
     for (char c : str) {
-        if (res.find(c) == res.end()) {
+        if (!res.contains(c)) {
             res[c] = 1;
         } else {
             ++res[c];
