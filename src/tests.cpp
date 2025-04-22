@@ -7,7 +7,7 @@
 
 KTEST(frequency_test) {
     const std::string s = "aaabbc";
-    std::unordered_map<char, size_t> freqs = getFrequency(s);
+    std::unordered_map<char, size_t> freqs = get_frequencies(s);
     KASSERT_EQ(3, freqs.size());
     KASSERT_EQ(3, freqs['a']);
     KASSERT_EQ(2, freqs['b']);
@@ -16,7 +16,7 @@ KTEST(frequency_test) {
 
 KTEST(frequency_test2) {
     const std::string s = "abcaba";
-    std::unordered_map<char, size_t> freqs = getFrequency(s);
+    std::unordered_map<char, size_t> freqs = get_frequencies(s);
     KASSERT_EQ(3, freqs.size());
     KASSERT_EQ(3, freqs['a']);
     KASSERT_EQ(2, freqs['b']);

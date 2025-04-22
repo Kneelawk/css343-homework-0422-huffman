@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-std::unordered_map<char, size_t> getFrequency(const std::string &str) {
+std::unordered_map<char, size_t> get_frequencies(const std::string &str) {
     std::unordered_map<char, size_t> res;
 
     for (char c : str) {

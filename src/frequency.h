@@ -8,6 +8,6 @@
 #include <string>
 #include <unordered_map>
 
-std::unordered_map<char, size_t> getFrequency(const std::string &str);
+std::unordered_map<char, size_t> get_frequencies(const std::string &str);
 
 #endif //FREQUENCY_H
