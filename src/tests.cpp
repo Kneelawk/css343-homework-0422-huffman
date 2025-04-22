@@ -3,12 +3,22 @@
 //
 
 #include "ktest.hpp"
+#include "frequency.h"
 
-KTEST(hello_test) {
-    const std::vector<std::string> vec;
-    KASSERT_TRUE(vec.empty());
+KTEST(frequency_test) {
+    const std::string s = "aaabbc";
+    std::unordered_map<char, size_t> freqs = getFrequency(s);
+    KASSERT_EQ(3, freqs.size());
+    KASSERT_EQ(3, freqs['a']);
+    KASSERT_EQ(2, freqs['b']);
+    KASSERT_EQ(1, freqs['c']);
 }
 
-KTEST(hello_other_test) {
-    KASSERT_EQ(5, 2 + 3);
+KTEST(frequency_test2) {
+    const std::string s = "abcaba";
+    std::unordered_map<char, size_t> freqs = getFrequency(s);
+    KASSERT_EQ(3, freqs.size());
+    KASSERT_EQ(3, freqs['a']);
+    KASSERT_EQ(2, freqs['b']);
+    KASSERT_EQ(1, freqs['c']);
 }
