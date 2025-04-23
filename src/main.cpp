@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <iostream>
+
+#include "encoder.h"
 #include "ktest.hpp"
 
 #include "frequency.h"
@@ -19,7 +21,7 @@ int main() {
     std::map<char, size_t> freqs;
     getFrequencies(toEncode, freqs);
 
-    HuffmanTree<char> ht(freqs);
+    const HuffmanTree<char> ht(freqs);
 
     std::vector<HuffmanLeaf<char> > leaves;
     ht.collect(leaves);
@@ -33,5 +35,27 @@ int main() {
     for (const auto &leaf: leaves) {
         std::cout << "  " << leaf.data << ": " << printCode(leaf.code, leaf.len) << std::endl;
     }
+
+    std::cout << std::endl;
+
+    BitSet encoded;
+    encode(ht, toEncode, encoded);
+    std::vector<uint8_t> encodedBytes;
+    const size_t encodedBitCount = encoded.getAll(encodedBytes);
+    const size_t lastBitCount = encodedBitCount % 8;
+
+    // print the first 8 bytes
+    std::cout << "First 8 bytes: ";
+    for (size_t i = 0; i < 8; i++) {
+        std::cout << printCode(encodedBytes[i], 8);
+    }
+    std::cout << std::endl;
+
+    std::cout << "Total Encoded Bit Count: " << encodedBitCount << std::endl;
+    std::cout << "Total Encoded Byte Count: " << encodedBytes.size() << std::endl;
+    std::cout << "That is " << (encodedBytes.size() - 1) << " with an additional " << lastBitCount << " bits." <<
+            std::endl;
+    std::cout << "Compression Ratio: " << (static_cast<double>(encodedBitCount) / static_cast<double>(
+                                               toEncode.size() * 8)) << std::endl;
     return 0;
 }

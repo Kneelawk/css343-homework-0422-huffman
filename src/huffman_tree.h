@@ -4,6 +4,7 @@
 
 #ifndef HUFFMAN_TREE_H
 #define HUFFMAN_TREE_H
+#include <iostream>
 #include <cstdint>
 #include <map>
 #include <queue>
@@ -17,6 +18,8 @@ public:
     size_t len = 0;
     size_t frequency = 0;
     size_t tiebreaker = 0;
+
+    HuffmanNode() = default;
 
     HuffmanNode(const size_t frequency, const size_t tiebreaker)
         : frequency(frequency),
@@ -75,6 +78,8 @@ class HuffmanParent final : public HuffmanNode<T> {
 public:
     HuffmanNode<T> *left = nullptr;
     HuffmanNode<T> *right = nullptr;
+
+    HuffmanParent() = default;
 
     HuffmanParent(const size_t frequency, const size_t tiebreaker, HuffmanNode<T> *left, HuffmanNode<T> *right)
         : HuffmanNode<T>(frequency, tiebreaker),
@@ -179,6 +184,8 @@ class HuffmanLeaf final : public HuffmanNode<T> {
 public:
     T data;
 
+    HuffmanLeaf() = default;
+
     HuffmanLeaf(const size_t frequency, const size_t tiebreaker, const T &data)
         : HuffmanNode<T>(frequency, tiebreaker),
           data(data) {
@@ -277,7 +284,7 @@ public:
         }
     }
 
-    void collect(std::vector<HuffmanLeaf<T> > &leafCollector) {
+    void collect(std::vector<HuffmanLeaf<T> > &leafCollector) const {
         if (root == nullptr) {
             return;
         }
@@ -299,7 +306,7 @@ public:
         }
     }
 
-    void collectMap(std::map<T, HuffmanLeaf<T> > &leafMap) {
+    void collectMap(std::map<T, HuffmanLeaf<T> > &leafMap) const {
         if (root == nullptr) {
             return;
         }
@@ -316,12 +323,12 @@ public:
                 q.push(parent->right);
             } else {
                 HuffmanLeaf<T> *leaf = dynamic_cast<HuffmanLeaf<T> *>(node);
-                leafMap.insert(leaf->data, *leaf);
+                leafMap[leaf->data] = *leaf;
             }
         }
     }
 
-    HuffmanLeaf<T> get(uint32_t code) {
+    HuffmanLeaf<T> get(uint32_t code) const {
         HuffmanNode<T> *node = root;
         while (node->isParent()) {
             HuffmanParent<T> *parent = dynamic_cast<HuffmanParent<T> *>(node);

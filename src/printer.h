@@ -18,9 +18,9 @@ public:
     }
 
     friend std::ostream &operator<<(std::ostream &os, const CodePrinter &obj) {
-        for (size_t i = 0; i < obj.len; i++) {
-            size_t j = obj.len - i - 1;
-            os << ((obj.code & (1 << j)) >> j);
+        for (size_t j = 0; j < obj.len; j++) {
+            const size_t i = obj.len - j - 1;
+            os << ((obj.code >> i) & 1);
         }
 
         return os;
