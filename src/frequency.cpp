@@ -6,16 +6,12 @@
 
 #include <iostream>
 
-std::map<char, size_t> getFrequencies(const std::string &str) {
-    std::map<char, size_t> res;
-
+void getFrequencies(const std::string &str, std::map<char, size_t> &frequencyMap) {
     for (char c : str) {
-        if (!res.contains(c)) {
-            res[c] = 1;
+        if (frequencyMap.find(c) == frequencyMap.end()) {
+            frequencyMap[c] = 1;
         } else {
-            ++res[c];
+            ++frequencyMap[c];
         }
     }
-
-    return res;
 }

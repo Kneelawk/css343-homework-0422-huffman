@@ -8,6 +8,6 @@
 #include <string>
 #include <map>
 
-std::map<char, size_t> getFrequencies(const std::string &str);
+void getFrequencies(const std::string &str, std::map<char, size_t> &frequencyMap);
 
 #endif //FREQUENCY_H
