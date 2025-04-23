@@ -239,6 +239,10 @@ public:
         std::cout << std::string(indent, ' ') << "Leaf : '" << data << "' " << this->frequency << " (" <<
                 printCode(this->code, this->len) << ");" << std::endl;
     }
+
+    std::string bitStr() {
+        return printCode(this->code, this->len).str();
+    }
 };
 
 template<typename T>

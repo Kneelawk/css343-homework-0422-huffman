@@ -6,6 +6,7 @@
 #define PRINTER_H
 #include <cstdint>
 #include <ostream>
+#include <sstream>
 
 class CodePrinter {
     uint32_t code;
@@ -15,6 +16,10 @@ public:
     CodePrinter(const uint32_t code, const size_t len)
         : code(code),
           len(len) {
+    }
+
+    std::string str() const {
+        return (std::stringstream() << *this).str();
     }
 
     friend std::ostream &operator<<(std::ostream &os, const CodePrinter &obj) {
